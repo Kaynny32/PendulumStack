@@ -17,11 +17,6 @@ public class AnimationManagerUI : MonoBehaviour
     CanvasGroup _resultPanel;
 
     [Space]
-    [Header("Scripts")]
-    [SerializeField]
-    UniversalAnimator _animatorUI;
-
-    [Space]
     [Header("Ease")]
     [SerializeField]
     Ease _showEase;
@@ -43,8 +38,7 @@ public class AnimationManagerUI : MonoBehaviour
 
     private void Start()
     {
-        //Invoke("MenuAnimationOpen", 0.2f);
-        // MenuAnimationOpen();
+        MenuAnimationOpenOrClose();
     }
 
     private void Update()
@@ -96,7 +90,7 @@ public class AnimationManagerUI : MonoBehaviour
 
     public void GameAnimationOpen()
     {
-        //MenuAnimationClose();
+        
     }
 
     public void GameAnimationClose()
