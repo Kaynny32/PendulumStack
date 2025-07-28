@@ -1,13 +1,12 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
-public class LineManager : MonoBehaviour
+public class Line : MonoBehaviour
 {
-    public static LineManager instance;
-
+    public static Line instance;
+    [SerializeField]
+    GameManager gameManager;
     [SerializeField]
     LineDate lineDate;
     [SerializeField]
@@ -16,6 +15,8 @@ public class LineManager : MonoBehaviour
     string lineName;
     [SerializeField]
     bool isDisable = false;
+    [SerializeField]
+    int index;
 
     private void Awake()
     {
@@ -46,13 +47,13 @@ public class LineManager : MonoBehaviour
                 lineDate.goBob.Clear();
                 lineDate.nameBob.Clear();
                 lineDate.count = 0;
-                Debug.Log("Clire " + lineName);
                 lineTriger.OnEnebleTriger();
+                gameManager.SetScore();
             }
             else
             {
                 isDisable = true;
-                Debug.Log("Stop Line " + lineName);
+                gameManager.CheckLine(index);
             }
         }
     }

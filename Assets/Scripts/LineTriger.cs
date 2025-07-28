@@ -5,7 +5,7 @@ using UnityEngine;
 public class LineTriger : MonoBehaviour
 {
     [SerializeField]
-    LineManager lineManager;
+    Line lineManager;
     [SerializeField]
     BoxCollider2D _triger;
 
@@ -20,7 +20,6 @@ public class LineTriger : MonoBehaviour
         if (collision.gameObject.GetComponent<BobItem>())
         {
             lineManager.AddBobLine(collision.gameObject.GetComponent<BobItem>().GetBobName(), collision.gameObject);
-            Debug.Log(collision.gameObject.GetComponent<BobItem>().GetBobName());
         }
     }
 
