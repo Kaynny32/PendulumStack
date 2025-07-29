@@ -307,7 +307,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nameBob: 
   chainEndPoint: {fileID: 0}
-  followSpeed: 10
+  followSpeed: 2
   dropGravityScale: 5000
   initialDropSpeed: 500
   maxDropSpeed: 5005
