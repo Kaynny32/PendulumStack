@@ -1,3 +1,5 @@
+using DG.Tweening;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class BobItem : MonoBehaviour
@@ -50,6 +52,10 @@ public class BobItem : MonoBehaviour
             ApplyPhysics();
             _shouldApplyPhysics = false;
         }
+        if (gameObject.GetComponent<RectTransform>().anchoredPosition.y <-1300)
+        {
+            Destroy(gameObject);
+        }
     }
 
     private void FollowChainPoint()
@@ -82,7 +88,7 @@ public class BobItem : MonoBehaviour
 
         _rb.velocity = Vector2.down * initialDropSpeed;
 
-        enabled = false;
+        //enabled = false;
     }
 
     public void SetFollow(bool follow)
@@ -98,7 +104,7 @@ public class BobItem : MonoBehaviour
         }
         else
         {
-            enabled = true;
+           // enabled = true;
             _rb.simulated = false;
             _rb.gravityScale = 0;
             _rb.velocity = Vector2.zero;
@@ -125,4 +131,10 @@ public class BobItem : MonoBehaviour
     {
         chainEndPoint = target;
     }
+
+    public void AnimBobDestroy()
+    {
+        UniversalAnimator.universalAnimator.Animate(gameObject.GetComponent<RectTransform>(), AnimationTargetType.RectSize, new Vector2(0,0),0,0.5f, Ease.InOutBack);
+    }
+    
 }

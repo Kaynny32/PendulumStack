@@ -43,28 +43,21 @@ public class AnimationManagerUI : MonoBehaviour
     RectTransform _lineThree;
     [SerializeField]
     CanvasGroup _pendulum;
+    [SerializeField]
+    TextMeshProUGUI _timeTxt;
 
     [Space]
     [Header("Scripts")]
     [SerializeField]
     AnimationPopap animationPopap;
+    [SerializeField]
+    UniversalAnimator _universalAnimator;
 
+    bool _isRestart = false;
 
     private void Start()
     {
         MenuAnimationOpenOrClose();
-    }
-
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.V))
-        {
-            GameAnimationOpenorClose();
-        }
-        if (Input.GetKeyDown(KeyCode.B))
-        {
-            GameAnimationOpenorClose(false);
-        }
     }
 
     public void MenuAnimationOpenOrClose(bool IsActive = true)
@@ -118,7 +111,7 @@ public class AnimationManagerUI : MonoBehaviour
             _gamePanel.blocksRaycasts = isActve;
             _gamePanel.DOFade(1f, 0.5f).SetEase(_showEase).OnComplete(() =>
             {
-                _scoreTxt.GetComponent<RectTransform>().DOAnchorPosY(-100, 0.75f).SetEase(_showEase);
+                _scoreTxt.GetComponent<RectTransform>().DOAnchorPosY(-250, 0.75f).SetEase(_showEase);
                 _scoreTxt.DOFade(1f, 0.75f).SetEase(_showEase).OnComplete(() =>
                 {
                     _pendulum.interactable = isActve;
@@ -134,7 +127,17 @@ public class AnimationManagerUI : MonoBehaviour
                             {
                                 _lineOne.DOAnchorPosY(800f, 0.75f).SetEase(_showEase);
                                 _lineOne.GetComponent<CanvasGroup>().interactable = isActve;
-                                _lineOne.GetComponent<CanvasGroup>().DOFade(1f, 0.75f).SetEase(_showEase);
+                                _lineOne.GetComponent<CanvasGroup>().DOFade(1f, 0.75f).SetEase(_showEase).OnComplete(() =>
+                                {
+                                    _timeTxt.DOFade(1f, 0.5f).SetEase(_showEase).OnComplete(() =>
+                                    {
+                                        /*if (_isRestart)
+                                        {
+                                            GameManager.instance.StartBtn();
+                                        }*/
+                                        GameManager.instance.StartBtn();
+                                    });
+                                });
                             });
                         });
                     });
@@ -180,16 +183,27 @@ public class AnimationManagerUI : MonoBehaviour
         {
             _resultPanel.interactable = isActive;
             _resultPanel.blocksRaycasts = isActive;
-            _resultPanel.DOFade(1f, 0.5f).SetEase(_showEase).OnComplete(() => {
-                animationPopap.AnimationScaleShowAndHidePopap(10, 650, 3, 900);
-            });            
+            _resultPanel.DOFade(1f, 0.5f).SetEase(_showEase).OnComplete(() =>
+            {
+                animationPopap.AnimationScaleShowAndHidePopap(10, 650, 3, 500);
+            });
         }
         else
         {
             _resultPanel.interactable = isActive;
             _resultPanel.blocksRaycasts = isActive;
-            animationPopap.AnimationScaleShowAndHidePopap(10, 650, 900, 3,false);
+            animationPopap.AnimationScaleShowAndHidePopap(10, 650, 500, 3, false);
             _resultPanel.DOFade(0f, 0.5f).SetEase(_hideEase);
         }
+    }
+
+    public void HideTimeText()
+    {
+        _universalAnimator.Animate(_timeTxt, AnimationTargetType.FadeText, Vector2.zero, 0, 0.5f, _hideEase);
+    }
+
+    public void SetIsRestart(bool isRestart)
+    {
+        _isRestart = isRestart;
     }
 }

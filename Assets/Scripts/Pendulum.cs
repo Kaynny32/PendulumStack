@@ -26,4 +26,9 @@ public class Pendulum : MonoBehaviour
                 .SetLoops(-1, LoopType.Yoyo);
         });
     }
+    public void StopAnimPendel()
+    {
+        transform.DOKill();
+        transform.rotation = new Quaternion(0,0,0,0);
+    }
 }

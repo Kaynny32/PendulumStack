@@ -34,6 +34,17 @@ public class Line : MonoBehaviour
 
     public void CheckLine()
     {
+        for (int i = 0; i < lineDate.goBob.Count; i++)
+        {
+            if (lineDate.goBob[i] == null)
+            {
+                lineDate.goBob.RemoveAt(i);
+                lineDate.nameBob.RemoveAt(i);
+                lineDate.count = 1; 
+                break;
+            }
+        }
+
         if (lineDate.count == 3)
         {
             lineTriger.OnDisableTriger();
@@ -41,8 +52,11 @@ public class Line : MonoBehaviour
             if (lineDate.nameBob[0] == lineName && lineDate.nameBob[1] == lineName && lineDate.nameBob[2] == lineName)
             {
                 foreach(GameObject go in lineDate.goBob)
-                { 
-                    Destroy(go);                    
+                {
+                    go.GetComponent<BobItem>().AnimBobDestroy();
+                    Loom.QueueOnMainThread(() => {
+                        Destroy(go);
+                    },0.5f);                                        
                 }
                 lineDate.goBob.Clear();
                 lineDate.nameBob.Clear();
@@ -56,6 +70,15 @@ public class Line : MonoBehaviour
                 gameManager.CheckLine(index);
             }
         }
+    }
+
+    public void ResetLine()
+    {
+        lineDate.count = 0;
+        lineDate.nameBob.Clear();
+        lineDate.goBob.Clear();
+        isDisable = false;
+        lineTriger.OnEnebleTriger();
     }
 }
 [Serializable]

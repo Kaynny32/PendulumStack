@@ -7,6 +7,14 @@ using UnityEngine.UI;
 
 public class UniversalAnimator : MonoBehaviour
 {
+    public static UniversalAnimator universalAnimator;
+
+    private void Awake()
+    {
+        if (universalAnimator == null)
+            universalAnimator = this;
+    }
+
     public void Animate(
          Component target,
          AnimationTargetType animationType,

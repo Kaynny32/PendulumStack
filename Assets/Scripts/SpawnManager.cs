@@ -16,7 +16,7 @@ public class SpawnManager : MonoBehaviour
 
     public void Start()
     {
-        SpawnBob();
+        //SpawnBob();
     }
 
     public void SpawnBob()

@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -23,15 +24,15 @@ public class GameManager : MonoBehaviour
     AnimationManagerUI _animationManagerUI;
     [SerializeField]
     Pendulum pendulum;
-
     [SerializeField]
     SpawnManager spawnManager;
 
     int _score = 0;
     BobItem bobItem;
-    [SerializeField]
     bool isGameStart;
     bool _isTouchProcessed;
+    int time = 4;
+
 
     private void Awake()
     {
@@ -61,6 +62,37 @@ public class GameManager : MonoBehaviour
         }
     }
 
+
+    public void StartBtn()
+    {
+        if (time != 0)
+        {
+            StartCoroutine(Starttimer());
+
+        }
+        else
+        {
+            _animationManagerUI.HideTimeText();
+            StartGame();
+            time = 4;
+        }
+    }
+
+    IEnumerator Starttimer()
+    {
+        time -= 1;
+        _uiManager.SetTimeText(time);
+        yield return new WaitForSeconds(1f);
+        StartBtn();
+    }
+
+    public void StartGame()
+    {
+        isGameStart = true;
+        spawnManager.SpawnBob();
+        pendulum.StartSwingAnimation();
+    }
+
     public void SetScore()
     {
         _score += 10;
@@ -69,7 +101,8 @@ public class GameManager : MonoBehaviour
 
     public void CheckLine(int indexLine)
     {
-        switch (indexLine) {
+        switch (indexLine)
+        {
             case 1:
                 _lineOne._isActive = false;
                 break;
@@ -82,13 +115,33 @@ public class GameManager : MonoBehaviour
         }
         if (_lineOne._isActive == false && _lineTwo._isActive == false && _lineThree._isActive == false)
         {
+            Destroy(bobItem.gameObject);
             _animationManagerUI.GameAnimationOpenorClose(false);
+            pendulum.StopAnimPendel();
+            _uiManager.SetResult(_score);
         }
     }
 
     public void SetBobItem(BobItem bobItem)
-    { 
+    {
         this.bobItem = bobItem;
+    }
+
+    public void RestGame()
+    {
+        isGameStart = false;
+        _score = 0;
+        _uiManager.SetScoreTxt(_score);
+
+        _lineOne._isActive = true;
+        _lineTwo._isActive = true;
+        _lineThree._isActive = true;
+
+        _lineOne._line.ResetLine();
+        _lineTwo._line.ResetLine();
+        _lineThree._line.ResetLine();
+
+        //StartBtn();
     }
 }
 [Serializable]

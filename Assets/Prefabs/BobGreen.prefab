@@ -12,6 +12,14 @@ PrefabInstance:
       propertyPath: nameBob
       value: BobGreen
       objectReference: {fileID: 0}
+    - target: {fileID: 3051338322080856, guid: 2f1e5fdadc784e847adcdec08952b6e9, type: 3}
+      propertyPath: m_Color.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3051338322080856, guid: 2f1e5fdadc784e847adcdec08952b6e9, type: 3}
+      propertyPath: m_Color.r
+      value: 0.09411765
+      objectReference: {fileID: 0}
     - target: {fileID: 2446536534474664715, guid: 2f1e5fdadc784e847adcdec08952b6e9, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -104,9 +112,25 @@ PrefabInstance:
       propertyPath: m_Color.r
       value: 0.09411765
       objectReference: {fileID: 0}
+    - target: {fileID: 6605805471192787942, guid: 2f1e5fdadc784e847adcdec08952b6e9, type: 3}
+      propertyPath: m_Color.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6605805471192787942, guid: 2f1e5fdadc784e847adcdec08952b6e9, type: 3}
+      propertyPath: m_Color.r
+      value: 0.09411765
+      objectReference: {fileID: 0}
     - target: {fileID: 6880977852192053229, guid: 2f1e5fdadc784e847adcdec08952b6e9, type: 3}
       propertyPath: m_Name
       value: BobGreen
+      objectReference: {fileID: 0}
+    - target: {fileID: 8312775600735822010, guid: 2f1e5fdadc784e847adcdec08952b6e9, type: 3}
+      propertyPath: m_Color.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8312775600735822010, guid: 2f1e5fdadc784e847adcdec08952b6e9, type: 3}
+      propertyPath: m_Color.r
+      value: 0.09411765
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
